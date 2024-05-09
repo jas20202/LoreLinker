@@ -30,6 +30,10 @@ The data will be stored in an SQL-Lite.
 
 TBD :D
 
+## More information
+
+More information about LoreLinker, it's develoment and it's later usage can be found in the [wiki](https://github.com/jas20202/LoreLinker/wiki)
+
 ---
 
 But hey! That's just a theory, a- wait wrong movie.
