@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="15.0.0">
+  <zoom_level>8</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>440</y>
+      <w>168</w>
+      <h>232</h>
+    </coordinates>
+    <panel_attributes>Character
+--
+_ - CharId: string_
+ - FirstName: string
+ - LastName: string
+ - Birthday: date
+ - Deathday: date
+ - Deathreason: string
+ - CurrentYear: int
+ - Heigt: float
+ - EyeColor: string
+ - HairColor: string
+ - Goal: string (long?)
+ - Personality: string (long)
+ - Description: string (long)
+ - Backstory: string (long)
+ - Picture: string (path)
+ - ColorPalette: string (path)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1040</x>
+      <y>568</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Event
+--
+_ - EventId: string_
+ - Title: string
+ - Date: date
+ - ShortSum: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1032</x>
+      <y>224</y>
+      <w>168</w>
+      <h>96</h>
+    </coordinates>
+    <panel_attributes>Story
+--
+_ - StoryId: string_
+ - Title: string
+ - Start: date
+ - End: date
+ - Summary: string (long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>464</x>
+      <y>72</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>World
+--
+_ - WorldId: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>96</x>
+      <y>280</y>
+      <w>168</w>
+      <h>64</h>
+    </coordinates>
+    <panel_attributes>Place
+--
+_ - PlaceId: string_
+ - Name: string
+ - Type: enum</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>128</x>
+      <y>776</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Language
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>368</x>
+      <y>776</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Gender
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>848</x>
+      <y>776</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Sexuality
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>608</x>
+      <y>776</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Pronoun
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>240</x>
+      <y>832</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Ability
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>480</x>
+      <y>832</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Like
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>728</x>
+      <y>832</y>
+      <w>168</w>
+      <h>48</h>
+    </coordinates>
+    <panel_attributes>Dislike
+--
+_ - Id: string_
+ - Name: string</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>704</x>
+      <y>240</y>
+      <w>168</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Species
+--
+_ - SpecId: string_
+ - Name: string
+ - Ability: string
+ - Information: string (long)</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>232</x>
+      <y>336</y>
+      <w>264</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+&lt; is born in</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;170.0;310.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>488</x>
+      <y>112</y>
+      <w>80</w>
+      <h>344</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=1
+exists in ^</panel_attributes>
+    <additional_attributes>10.0;410.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>664</y>
+      <w>328</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=m
+&lt; speaks</panel_attributes>
+    <additional_attributes>380.0;10.0;380.0;40.0;10.0;40.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>312</x>
+      <y>664</y>
+      <w>232</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=m
+m2=n
+&lt; has</panel_attributes>
+    <additional_attributes>10.0;210.0;10.0;60.0;260.0;60.0;260.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>208</x>
+      <y>336</y>
+      <w>288</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+&lt; lives in</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;200.0;340.0;200.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>184</x>
+      <y>336</y>
+      <w>312</w>
+      <h>208</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+&lt; died in</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;230.0;370.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>112</y>
+      <w>112</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=1
+exists in ^</panel_attributes>
+    <additional_attributes>120.0;170.0;10.0;170.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>624</x>
+      <y>88</y>
+      <w>456</w>
+      <h>152</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+&lt; takes place in</panel_attributes>
+    <additional_attributes>10.0;20.0;540.0;20.0;540.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>312</y>
+      <w>120</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+is a ^</panel_attributes>
+    <additional_attributes>90.0;10.0;90.0;170.0;10.0;170.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1168</x>
+      <y>312</y>
+      <w>88</w>
+      <h>272</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+happens in ^</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;320.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>520</x>
+      <y>352</y>
+      <w>128</w>
+      <h>104</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=1
+m2=n
+is parent of &gt;</panel_attributes>
+    <additional_attributes>10.0;110.0;10.0;20.0;130.0;20.0;130.0;110.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>560</y>
+      <w>416</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=n
+involved in &gt;</panel_attributes>
+    <additional_attributes>10.0;20.0;500.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>560</x>
+      <y>664</y>
+      <w>56</w>
+      <h>184</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=m
+has v</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;210.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>440</x>
+      <y>664</y>
+      <w>128</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=1
+has v</panel_attributes>
+    <additional_attributes>130.0;10.0;130.0;90.0;10.0;90.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>312</y>
+      <w>440</w>
+      <h>192</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=1
+antagonist in &gt;</panel_attributes>
+    <additional_attributes>10.0;210.0;520.0;210.0;520.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>312</y>
+      <w>464</w>
+      <h>224</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=1
+protagonist in &gt;</panel_attributes>
+    <additional_attributes>10.0;250.0;550.0;250.0;550.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>608</x>
+      <y>664</y>
+      <w>56</w>
+      <h>128</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=2
+has v</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;140.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>648</y>
+      <w>200</w>
+      <h>200</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=m
+has v</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;230.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>640</x>
+      <y>616</y>
+      <w>288</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=-
+m1=n
+m2=m
+has v</panel_attributes>
+    <additional_attributes>10.0;20.0;330.0;20.0;330.0;200.0</additional_attributes>
+  </element>
+</diagram>
