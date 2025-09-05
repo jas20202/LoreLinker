@@ -5,6 +5,8 @@ import { FileService } from "./services/file.service.js";
 
 export class App {
 
+    openFilePath;
+
     colorPalette;
 
     /** @type {CharacterService} */
@@ -112,6 +114,7 @@ function setupDI(app) {
     };
     app.colorPalette = [];
     app.relationships = [];
+    app.openFilePath = "";
     app.injectDependencies(di);
 }
 
