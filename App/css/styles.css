@@ -163,9 +163,12 @@
     font-weight: bold;
     margin-bottom: 6px;
   }
+
+  #customColorButton {
+    background-color: #000;
+  }
   
   input[type="text"],
-  input[type="date"],
   textarea {
     width: 100%;
     padding: 8px;
@@ -176,24 +179,8 @@
     border-radius: 4px;
   }
 
-  input[type="checkbox"] {
-    margin-right: 5px;
-  }
-
   textarea {
     height: 100px;
-  }
-  
-  /* Grouped Input Elements */
-  .radio-group {
-    gap: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-  
-  .checkbox-group label,
-  .radio-group label {
-    font-weight: normal;
   }
   
   /* Image Preview */
@@ -226,7 +213,6 @@
   body::-webkit-scrollbar,
   textarea::-webkit-scrollbar,
   .toolbar::-webkit-scrollbar,
-  .checkbox-list::-webkit-scrollbar,
   .entry-list::-webkit-scrollbar,
   .main-content::-webkit-scrollbar {
     width: 8px;
@@ -235,39 +221,60 @@
   body::-webkit-scrollbar-thumb,
   textarea::-webkit-scrollbar-thumb,
   .toolbar::-webkit-scrollbar-thumb,
-  .checkbox-list::-webkit-scrollbar-thumb,
   .entry-list::-webkit-scrollbar-thumb,
   .main-content::-webkit-scrollbar-thumb {
     background-color: var(--color-surface-400);
     border-radius: 10px;
   }
 
-  .checkbox-list {
-    margin-bottom: 1em;
-    height: 100px;
-    overflow-y: scroll;
-    border: 1px solid #444;
-    padding: 5px;
-    background: var(--color-surface-100);
-  }
-
   .left-panel {
     display: flex;
     flex-direction: column;
   }
+  
+  .color-palette {
+      max-width: 500px;
+      margin: 20px;
+      font-family: Arial, sans-serif;
+    }
 
-  .trigger {
-    margin-top: 5px;
-  }
+    .palette {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
 
-  .date-medium {
-    margin-top: 15px;
-  }
+    .color-swatch {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 10px;
+      border-radius: 4px;
+      color: #fff;
+      min-width: 120px;
+      position: relative;
+      cursor: default;
+    }
 
-  .date-medium select,
-  .date-medium label {
-    margin-right: 5px;
-  }
+    .color-swatch .remove-btn {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+
+    .add-controls {
+      margin-top: 15px;
+    }
+
+    .add-controls input,
+    .add-controls button {
+      margin-right: 5px;
+      padding: 5px;
+    }
 
   @media (min-width: 1440px) {
   .main-content {

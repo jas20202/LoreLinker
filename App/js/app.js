@@ -1,8 +1,11 @@
 import { Character } from "./models/character.model.js";
+import { Relationship } from "./models/relationship.model.js";
 import { CharacterService } from "./services/character.service.js";
 import { FileService } from "./services/file.service.js";
 
 export class App {
+
+    colorPalette;
 
     /** @type {CharacterService} */
     characterService;
@@ -11,6 +14,8 @@ export class App {
 
     /** @type {Character} */
     loadedCharacter;
+    /** @type {Relationship[]} */
+    loadedRelationships;
 
     /** @type {Element} */
     mainContainer;
@@ -49,20 +54,39 @@ export class App {
     async openCharacter() {
         this.loadedCharacter = await this.fileService.openCharacterFromJson();
         this.characterService.renderCharacter(this.loadedCharacter);
+        this.loadedRelationships = this.loadedCharacter.relationships;
+        this.colorPalette = this.loadedCharacter.color_palette;
     }
 
-    testing(){
-        //test();
-        console.log("ehhhh");
+    updateColor(input) {
+        document.getElementById('customColorButton').style.backgroundColor = input.value;
+    }
+
+    removeSwatch(button) {
+        this.colorPalette = this.characterService.removeSwatch(this.colorPalette, button);
+    }
+    
+    addSwatch() {
+        this.colorPalette = this.characterService.addSwatch(this.colorPalette);
+    }
+
+    clear(){
+        this.colorPalette = [];
+        this.relationships = [];
+        this.loadedCharacter = new Character();
+
+        this.characterService.clearFields()
     }
 }
 
 function setupDI(app) {
+    console.clear();
     const di = {
         characterService: new CharacterService(),
         fileService: new FileService()
     };
-
+    app.colorPalette = [];
+    app.relationships = [];
     app.injectDependencies(di);
 }
 
