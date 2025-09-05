@@ -1,6 +1,9 @@
+import { Relationship } from "../models/relationship.model.js";
+import { Character } from "../models/character.model.js";
+
 export class CharacterService {
 
-    renderCharacter(character) {
+    renderCharacter(/** @type {Character} */ character) {
         document.getElementById('name').value = character.name;
         document.getElementById('age').value = character.age;
         document.getElementById('height').value = character.height;
@@ -16,23 +19,25 @@ export class CharacterService {
     
         let palette = document.getElementById('palette');
         let paletteHTML = "";
-        console.log(character.color_palette)
         character.color_palette.forEach(swatch => {
           paletteHTML += "<div class=\"color-swatch\" id='lable-" + swatch[0] + "' style=\"background-color: " + swatch[1] + ";\">" + swatch[0] + " " + swatch[1] + "<button class='remove-btn' onclick='app.removeSwatch(this)'>×</button> </div>";
         });
-        //<div class="color-swatch" style="background-color: #eac2e1;">Socks #eac2e1 <button class="remove-btn" onclick="removeSwatch(this)">×</button></div>
         palette.innerHTML = paletteHTML;
         
+        this.renderRelationsships(character.relationships);
+    }
+
+    renderRelationsships(rels){
         let relationships = document.getElementById('relationships');
         let relHTML = "";
-        console.log(character.relationships)
-        character.relationships.forEach(rel => {
-          relHTML += "<div class=\"relationship-card\">";
-          relHTML += "<div class=\"relationship-details\">";
-          relHTML += "<h4> <a href=\"#" + rel.id + "\">" + rel.name + "</a></h4>";
+        rels.forEach(rel => {
+          relHTML += "<div class=\"relationship-card\" >";
+          relHTML += "<div class=\"relationship-details\" onclick=\"app.openModal("+ rel.id +")\">";
+          relHTML += "<h4>" + rel.name + "</h4>";
           relHTML += "<p><strong>Relation:</strong> " + rel.relation + "</p>";
           relHTML += "<p><strong>Backstory:</strong> " + rel.backstory + "</p>";
           relHTML += "</div>";
+          relHTML += "<button class=\"remove-btn\" onclick=\"app.removeRelationship("+ rel.id +")\">×</button>"
           relHTML += "</div>";
         });
         relationships.innerHTML = relHTML;
@@ -86,5 +91,43 @@ export class CharacterService {
         document.getElementById('palette').innerHTML = "";
         
         document.getElementById('relationships').innerHTML = "";
+    }
+
+    setModalContent(/** @type {Relationship} */ rel) {
+        document.getElementById('modalTitle').innerHTML = "Edit Relationship";
+        document.getElementById('relId').value = rel.id;
+        document.getElementById('relName').value = rel.name;
+        document.getElementById('relRelation').value = rel.relation;
+        document.getElementById('relBackstory').value = rel.backstory;
+    }
+
+    removeModalContent() {
+        document.getElementById('relId').value = "";
+        document.getElementById('relName').value = "";
+        document.getElementById('relRelation').value = "";
+        document.getElementById('relBackstory').value = "";
+    }
+
+    /** @returns {Relationship} */
+    createNewRelationship() {
+        if(document.getElementById('relId').value) {
+            let rel = new Relationship(
+                document.getElementById('relId').value,
+                document.getElementById('relName').value,
+                document.getElementById('relRelation').value,
+                document.getElementById('relBackstory').value,
+                ""
+            );
+            return rel;
+        }
+        console.log("Somehow I got here!");
+        return;
+    }
+
+    updateRelationship(/** @type {Relationship} */ rel){
+        document.getElementById('relId').value ? rel.id = document.getElementById('relId').value : rel.id = rel.id;
+        rel.name = document.getElementById('relName').value;
+        rel.relation = document.getElementById('relRelation').value;
+        rel.backstory = document.getElementById('relBackstory').value;
     }
 }

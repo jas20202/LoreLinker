@@ -19,9 +19,12 @@ export class App {
 
     /** @type {Element} */
     mainContainer;
+    /** @type {Element} */
+    modalContainer;
 
-    constructor(mainContainer) {
+    constructor(mainContainer, modalContainer) {
         this.mainContainer = mainContainer;
+        this.modalContainer = modalContainer;
     }
 
     injectDependencies(di) {
@@ -29,33 +32,55 @@ export class App {
         this.fileService = di.fileService;
     }
 
-    /* _setModalContent(/** @type {Image} image) {
-        this.modalImage.setAttribute('src', image.imageSrc);
-        this.modalImage.setAttribute('alt', image.alt);
-    }
-
-    _removeModalContent() {
-        this.modalImage.removeAttribute('src');
-        this.modalImage.removeAttribute('alt');
-    }
-
-    _openModal() {
-        this.modalContainer.classList = 'active';
-        document.body.classList = 'stop-scroll';
-    }
-
-    _closeModal() {
-        this.modalContainer.classList = '';
-        document.body.classList = '';
-        this._currentlyOpenedIndex = -1;
-        this._removeModalContent();
-    } */
-    
     async openCharacter() {
         this.loadedCharacter = await this.fileService.openCharacterFromJson();
         this.characterService.renderCharacter(this.loadedCharacter);
         this.loadedRelationships = this.loadedCharacter.relationships;
         this.colorPalette = this.loadedCharacter.color_palette;
+    }
+
+    saveModal() {
+        const id = document.getElementById('relId').value
+        let rel = this.loadedRelationships.find(entry => entry.id === String(id));
+        if(rel) {
+            this.characterService.updateRelationship(rel);
+        }
+        else {
+            rel = this.characterService.createNewRelationship()
+            if(rel) {
+                this.loadedRelationships.push(rel)
+            }
+            else {
+                return;
+            }
+        }
+        this.characterService.renderRelationsships(this.loadedRelationships);
+        this.closeModal()
+    }
+
+    openModal(id) {
+        const rel = this.loadedRelationships.find(entry => entry.id === String(id));
+        this.characterService.setModalContent(rel);
+        this.modalContainer.classList.add('active');
+    }
+
+    openModalNew() {
+        document.getElementById('modalTitle').innerText = "New Relationship";
+        this.modalContainer.classList.add('active');
+    }
+
+    closeModal() {
+        this.modalContainer.classList.remove('active');
+        this.characterService.removeModalContent();
+    } 
+
+    removeRelationship(id) {
+        const toRemove = this.loadedRelationships.find(entry => entry.id === String(id));
+        const index = this.loadedRelationships.indexOf(toRemove);
+        if(index !== -1) {
+            this.loadedRelationships.splice(index, 1);
+        }
+        this.characterService.renderRelationsships(this.loadedRelationships);
     }
 
     updateColor(input) {
@@ -92,7 +117,8 @@ function setupDI(app) {
 
 
 const app = new App(
-    document.getElementById('main-content')
+    document.getElementById('main-content'),
+    document.getElementById('relationship-modal')
 );
 
 setupDI(app);
