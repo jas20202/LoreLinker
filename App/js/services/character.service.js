@@ -43,6 +43,20 @@ export class CharacterService {
         relationships.innerHTML = relHTML;
     }
 
+    /** @returns {Character} */
+    getCharacter(colorPalette, rels) {
+      return new Character(
+        document.getElementById('name').value,
+        document.getElementById('age').value,
+        document.getElementById('height').value,
+        document.getElementById('appearance').innerText,
+        document.getElementById('personality').innerText,
+        document.getElementById('backstory').innerText,
+        colorPalette,
+        rels 
+      );
+    }
+
     removeSwatch(colorPalette, button) {
       const swatch = button.parentElement;
       const label = swatch.id.split("-")[1];

@@ -1,0 +1,26 @@
+{
+  "name": "lorelinker",
+  "version": "1.0.0",
+  "description": "A desktop application for connecting THE LOOOOOOOREEEEEE.",
+  "main": "App/main.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jas20202/LoreLinker.git"
+  },
+  "author": "Jas20202",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jas20202/LoreLinker/issues"
+  },
+  "homepage": "https://github.com/jas20202/LoreLinker#readme",
+  "devDependencies": {
+    "electron": "^38.2.0"
+  }
+}

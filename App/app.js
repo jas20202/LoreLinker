@@ -1,11 +1,9 @@
-import { Character } from "./models/character.model.js";
-import { Relationship } from "./models/relationship.model.js";
-import { CharacterService } from "./services/character.service.js";
-import { FileService } from "./services/file.service.js";
+import { Character } from "./js/models/character.model.js";
+import { Relationship } from "./js/models/relationship.model.js";
+import { CharacterService } from "./js/services/character.service.js";
+import { FileService } from "./js/services/file.service.js";
 
 export class App {
-
-    openFilePath;
 
     colorPalette;
 
@@ -41,16 +39,35 @@ export class App {
         this.colorPalette = this.loadedCharacter.color_palette;
     }
 
+    async saveCharacter() {
+        if(!this.loadedRelationships) {
+            this.loadedRelationships = [];
+        } 
+        this.loadedCharacter = this.characterService.getCharacter(this.colorPalette, this.loadedRelationships);
+        this.fileService.saveCharacterToJson(this.loadedCharacter);
+    }
+
     saveModal() {
-        const id = document.getElementById('relId').value
+        const id = document.getElementById('relId').value;
+        if(!id) return;
+        if(!this.loadedRelationships) {
+            this.loadedRelationships = [];
+            let rel = this.characterService.createNewRelationship();
+            if(rel) {
+                this.loadedRelationships.push(rel);
+            }
+            else {
+                return;
+            }
+        } 
         let rel = this.loadedRelationships.find(entry => entry.id === String(id));
         if(rel) {
             this.characterService.updateRelationship(rel);
         }
         else {
-            rel = this.characterService.createNewRelationship()
+            rel = this.characterService.createNewRelationship();
             if(rel) {
-                this.loadedRelationships.push(rel)
+                this.loadedRelationships.push(rel);
             }
             else {
                 return;
@@ -114,7 +131,6 @@ function setupDI(app) {
     };
     app.colorPalette = [];
     app.relationships = [];
-    app.openFilePath = "";
     app.injectDependencies(di);
 }
 
