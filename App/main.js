@@ -21,10 +21,18 @@ const createWindow = () => {
 let openFilePath = ""
 
 app.on('ready', () => {
+
+    ipcMain.handle('join', (event, path1, path2) => {
+        return path.join(path1, path2);
+    });
+
+    ipcMain.handle('emptyCurrent', () => {
+        openFilePath = "";
+    });
+
     ipcMain.handle('openFile', async () => {
         const result = await dialog.showOpenDialog({
-        properties: ['openFile'],
-            filters: [{ name: 'JSON Files', extensions: ['json'] }]
+            properties: ['openDirectory'],
         });
 
         if (result.canceled || result.filePaths.length === 0) {
@@ -32,6 +40,35 @@ app.on('ready', () => {
         }
         openFilePath = result.filePaths[0]
         return openFilePath;
+    });
+
+    ipcMain.handle('saveFileWithImage', async (event, {jsonData, u8arr, mime}) => {
+        console.log(openFilePath)
+        
+        if(!openFilePath) {
+            const result = await dialog.showOpenDialog({
+                properties: ['openDirectory']
+            });
+
+            if (result.canceled || result.filePaths.length === 0) {
+                return null;
+            }
+            openFilePath = result.filePaths[0]
+        }
+        fs.writeFile(path.join(openFilePath, "character_info.json"), jsonData, err =>{
+            if(err) {
+                dialog.showErrorBox({title: "Error while saving", content: err});
+                return null;
+            } 
+        });
+        fs.writeFile(path.join(openFilePath, "character_image.png"), u8arr, err =>{
+            if(err) {
+                dialog.showErrorBox({title: "Error while saving", content: err});
+                return null;
+            } else {
+                return openFilePath;
+            }
+        });
     });
 
     ipcMain.handle('saveFile', async (event, data) => {
@@ -44,9 +81,9 @@ app.on('ready', () => {
             if (result.canceled) {
                 return false;
             }
-            openFilePath = result.filePath
+            openFilePath = path.dirname(result.filePath);
         }
-        fs.writeFile(openFilePath, data, err =>{
+        fs.writeFile(path.join(openFilePath, "character_info.json"), data, err =>{
             if(err) {
                 dialog.showErrorBox({title: "Error while saving", content: err});
                 return false;

@@ -6,25 +6,28 @@ import { FileService } from "./js/services/file.service.js";
 export class App {
 
     colorPalette;
-
+    
     /** @type {CharacterService} */
     characterService;
     /** @type {FileService} */
     fileService;
-
+    
     /** @type {Character} */
     loadedCharacter;
     /** @type {Relationship[]} */
     loadedRelationships;
-
+    
     /** @type {Element} */
     mainContainer;
     /** @type {Element} */
     modalContainer;
-
-    constructor(mainContainer, modalContainer) {
+    /** @type {Element} */
+    imageInput;
+    
+    constructor(mainContainer, modalContainer, imageInput) {
         this.mainContainer = mainContainer;
         this.modalContainer = modalContainer;
+        this.imageInput = imageInput;
     }
 
     injectDependencies(di) {
@@ -33,10 +36,14 @@ export class App {
     }
 
     async openCharacter() {
-        this.loadedCharacter = await this.fileService.openCharacterFromJson();
+        const load = await this.fileService.openCharacterFromJson();
+
+        this.loadedCharacter = load.res;
         this.characterService.renderCharacter(this.loadedCharacter);
         this.loadedRelationships = this.loadedCharacter.relationships;
         this.colorPalette = this.loadedCharacter.color_palette;
+
+        this.characterService.displayImage(load.imageSource, "character_image.png")
     }
 
     async saveCharacter() {
@@ -44,7 +51,7 @@ export class App {
             this.loadedRelationships = [];
         } 
         this.loadedCharacter = this.characterService.getCharacter(this.colorPalette, this.loadedRelationships);
-        this.fileService.saveCharacterToJson(this.loadedCharacter);
+        this.fileService.saveCharacterToJson(this.loadedCharacter, this.characterService.getPreview());
     }
 
     saveModal() {
@@ -119,7 +126,7 @@ export class App {
         this.relationships = [];
         this.loadedCharacter = new Character();
 
-        this.characterService.clearFields()
+        this.characterService.clearFields();
     }
 }
 
@@ -132,12 +139,24 @@ function setupDI(app) {
     app.colorPalette = [];
     app.relationships = [];
     app.injectDependencies(di);
+
+    app.imageInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    app.characterService.displayImage(e.target.result, file.name);
+                };
+                reader.readAsDataURL(file); 
+            }
+        }); 
 }
 
 
 const app = new App(
     document.getElementById('main-content'),
-    document.getElementById('relationship-modal')
+    document.getElementById('relationship-modal'),
+    document.getElementById('image')
 );
 
 setupDI(app);

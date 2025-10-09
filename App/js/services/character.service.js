@@ -3,6 +3,10 @@ import { Character } from "../models/character.model.js";
 
 export class CharacterService {
 
+    getPreview() {
+      return document.getElementById('image-preview');
+    }
+
     renderCharacter(/** @type {Character} */ character) {
         document.getElementById('name').value = character.name;
         document.getElementById('age').value = character.age;
@@ -49,9 +53,9 @@ export class CharacterService {
         document.getElementById('name').value,
         document.getElementById('age').value,
         document.getElementById('height').value,
-        document.getElementById('appearance').innerText,
-        document.getElementById('personality').innerText,
-        document.getElementById('backstory').innerText,
+        document.getElementById('appearance').value,
+        document.getElementById('personality').value,
+        document.getElementById('backstory').value,
         colorPalette,
         rels 
       );
@@ -93,18 +97,24 @@ export class CharacterService {
     }
 
     clearFields() {
-        document.getElementById('name').value = "";
-        document.getElementById('age').value = "";
-        document.getElementById('height').value = "";
-        // document.getElementById('character-image').innerHTML = "<img src=\"../../assets/characters/" + characterId + "/character_image.png\"/>";
-    
-        document.getElementById('appearance').innerText = "";
-        document.getElementById('personality').innerText = "";
-        document.getElementById('backstory').innerText = "";
-    
-        document.getElementById('palette').innerHTML = "";
-        
-        document.getElementById('relationships').innerHTML = "";
+      document.getElementById('name').value = "";
+      document.getElementById('age').value = "";
+      document.getElementById('height').value = "";
+  
+      document.getElementById('appearance').innerText = "";
+      document.getElementById('personality').innerText = "";
+      document.getElementById('backstory').innerText = "";
+  
+      document.getElementById('palette').innerHTML = "";
+      
+      document.getElementById('relationships').innerHTML = "";
+
+      document.getElementById('image-preview').src = "#";
+      document.getElementById('image-preview').style.display = 'none';
+      document.getElementById('custom-file-upload').innerHTML = "Load Image";
+
+      document.title = "Lore Linker";
+      electronApi.emptyCurrent();
     }
 
     setModalContent(/** @type {Relationship} */ rel) {
@@ -139,9 +149,15 @@ export class CharacterService {
     }
 
     updateRelationship(/** @type {Relationship} */ rel){
-        document.getElementById('relId').value ? rel.id = document.getElementById('relId').value : rel.id = rel.id;
-        rel.name = document.getElementById('relName').value;
-        rel.relation = document.getElementById('relRelation').value;
-        rel.backstory = document.getElementById('relBackstory').value;
+      document.getElementById('relId').value ? rel.id = document.getElementById('relId').value : rel.id = rel.id;
+      rel.name = document.getElementById('relName').value;
+      rel.relation = document.getElementById('relRelation').value;
+      rel.backstory = document.getElementById('relBackstory').value;
+    }
+
+    displayImage(source, fileName) {
+      document.getElementById('image-preview').src = source;
+      document.getElementById('image-preview').style.display = 'block';
+      document.getElementById('custom-file-upload').innerHTML = fileName;
     }
 }
